@@ -98,6 +98,7 @@ func (c *HdfsClient) Scp(src string, dst string, stat statFunc, readDir readDirF
 	if fileInfo.IsDir() {
 		return c.WalkDir(src, dst, "", readDir, copyFile, mkdir)
 	} else {
+		dst = path.Join(dst, fileInfo.Name())
 		return copyFile(c.client, src, dst)
 	}
 }
